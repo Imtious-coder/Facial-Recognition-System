@@ -1,5 +1,5 @@
 #root {
-  background: #F3F4F6;
+  background: #f3f4f6;
   width: 100%;
 }
 
@@ -118,9 +118,12 @@
 }
 
 .heading {
+  font-size: 24px;
   margin-top: 0px;
 }
 .title {
+  font-size: 18px;
+  margin: 10px 0px;
   /* margin-top: 0px; */
 }
 
@@ -151,11 +154,15 @@ body {
   width: 100%;
 }
 
-/* @media only screen and (min-width: 425px){
-	.w-full {
-    width: 350px;
+.w-100 {
+  width: 100%;
+}
+
+@media only screen and (min-width: 425px) {
+  .w-full {
+    width: 380px;
   }
-} */
+}
 
 .form .label {
   font-weight: 700;
@@ -172,10 +179,13 @@ body {
   margin-bottom: 10px;
   font-size: 16px;
   padding: 0px 10px;
+  background-color: #fff;
+  color: #000;
 }
 
 .form .submit-btn {
   outline: none;
+  border: none;
   margin: 5px 0px;
   padding: 10px 30px;
   font-weight: 700;
@@ -188,6 +198,7 @@ body {
 
 .form .submit-btn-disabled:disabled {
   outline: none;
+  border: none;
   margin: 5px 0px;
   padding: 10px 30px 8px 30px;
   font-weight: 700;
@@ -201,6 +212,7 @@ body {
 
 .form .captureBtn {
   outline: none;
+  border: none;
   border: 2px solid greenyellow;
   margin: 10px auto;
   padding: 7px 20px 5px 20px;
@@ -212,11 +224,13 @@ body {
 }
 
 .form .captureBtn:hover {
+  border: none;
   background-color: greenyellow;
 }
 
 .form .verify-btn {
   outline: none;
+  border: none;
   width: 100%;
   margin: 5px 0px;
   padding: 10px 30px;
@@ -230,6 +244,7 @@ body {
 
 .form .verify-btn-success {
   outline: none;
+  border: none;
   width: 100%;
   margin: 5px 0px;
   padding: 10px 30px;

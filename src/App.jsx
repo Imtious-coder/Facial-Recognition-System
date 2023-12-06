@@ -2,6 +2,9 @@ import { useEffect, useRef, useState } from "react";
 import "./App.css";
 // import { createRoot } from "react-dom/client";
 import * as facemesh from "@tensorflow-models/facemesh";
+import * as tf from "@tensorflow/tfjs";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import Webcam from "react-webcam";
 
 function App() {
@@ -37,7 +40,8 @@ function App() {
       company: e.target.value,
     });
   };
-  console.log(formData);
+  // console.log(formData, tf);
+  // console.log(tf);
 
   // setInterval(() => {
   //     fetch(
@@ -108,8 +112,8 @@ function App() {
         // Define thresholds for sensitivity with adjusted values
         const leftThreshold = 0.6; // 65% of the video width
         const rightThreshold = 0.35; // 35% of the video width
-        const upperThreshold = 0.3; // Adjusted value for reduced sensitivity
-        const bottomThreshold = 0.6; // 50% of the video height
+        const upperThreshold = 0.4; // Adjusted value for reduced sensitivity
+        const bottomThreshold = 0.5; // 50% of the video height
 
         // Check direction based on thresholds
         const isLookingLeft = avgEyeX < videoWidth * leftThreshold;
@@ -146,7 +150,7 @@ function App() {
         setNoFaceDetected(false);
       } else {
         // No face detected
-        console.log("No face detected");
+        console.log("No face detected", tf);
       }
     }
   };
@@ -213,11 +217,81 @@ function App() {
   //     });
   // }, []);
 
+  useEffect(() => {
+    pictureCLicked === 1
+      ? toast.success("Fornt Face Detected", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        })
+      : pictureCLicked === 2
+      ? toast.success("Right Face Detected", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        })
+      : pictureCLicked === 3
+      ? toast.success("Left Face Detected", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        })
+      : pictureCLicked === 4
+      ? toast.success("Upper Front Face Detected", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        })
+      : pictureCLicked === 5
+      ? toast.success("Bottom Front Face Detected", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        })
+      : "";
+  }, [pictureCLicked]);
+
   return (
-    <div className="flex justify-center w-full">
+    <div className="flex justify-center">
+      <ToastContainer
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
+      {/* Same as */}
+      <ToastContainer />
       <div
         className={`${
-          showVerify ? "bg_primary" : "bg-gray-100 dark:bg-gray-900 "
+          showVerify
+            ? "bg_primary w-100"
+            : "bg-gray-100 dark:bg-gray-900 w-full"
         } relative flex items-top justify-center min-h-screen sm:items-center  sm:pt-4 `}
       >
         <div className="w-full">
@@ -322,7 +396,7 @@ function App() {
             </>
           ) : (
             <div className="flex justify-center sm:justify-start w-full">
-              <div className="container mt-5 form w-full bg_dark">
+              <div className="container sm:mt-5 form w-full bg_dark">
                 <h2 className="text-center heading white">
                   Facial Recognition System
                 </h2>
@@ -337,6 +411,7 @@ function App() {
                       className="input"
                       id="name"
                       name="name"
+                      placeholder="Name"
                       value={formData.name}
                       required
                       onChange={(e) => handleInputChange(e)}
@@ -366,6 +441,7 @@ function App() {
                       className="input"
                       id="employeeID"
                       name="employeeID"
+                      placeholder="Your office ID"
                       value={formData.employeeID}
                       onChange={(e) => handleInputChange(e)}
                       required
@@ -378,6 +454,7 @@ function App() {
                       className="input"
                       id="phoneNumber"
                       name="phoneNumber"
+                      placeholder="Phone"
                       value={formData.phoneNumber}
                       onChange={(e) => handleInputChange(e)}
                       required
@@ -386,7 +463,7 @@ function App() {
                   {capturedPictures.length > 0 ? (
                     ""
                   ) : (
-                    <p className="message">
+                    <p className="message mb-2">
                       *Please make sure your face is properly visible. Take 5
                       pictures. Click on the{" "}
                       <strong>Complete Your Face Registration</strong> to verify
