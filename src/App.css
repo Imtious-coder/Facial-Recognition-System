@@ -1,0 +1,266 @@
+#root {
+  background: #F3F4F6;
+  width: 100%;
+}
+
+.webCam {
+  width: 250px;
+  height: 250px;
+  border-radius: 100%;
+  border: 3px solid #f05941;
+  overflow: hidden !important;
+  margin: auto;
+}
+
+.webCam .webCam-view {
+  width: 100%;
+  height: 100%;
+  scale: 1.5;
+}
+
+.font_14 {
+  font-size: 14.5px !important;
+}
+
+.information .title {
+  font-size: 22px;
+  font-weight: 700;
+  color: #fff;
+  text-align: center;
+}
+
+.information .lines {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 30px;
+}
+
+.information .lines .lines-regular {
+  width: 30px;
+  height: 3px;
+  background-color: #fff;
+  border-radius: 5px;
+}
+
+.information .lines .lines-success {
+  width: 30px;
+  height: 3.5px;
+  background-color: #22092c;
+  border-radius: 5px;
+}
+
+.information .messages {
+  font-size: 14px;
+  color: #fff;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.information .messages2 {
+  font-size: 14px;
+  color: #fff;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.captureButton:disabled {
+  display: flex;
+  justify-content: center;
+  padding: 10px 30px;
+  border-radius: 25px;
+  background: transparent;
+  color: #fff;
+  font-size: 14px;
+  font-weight: bold;
+  margin: 30px auto;
+  border: 2px solid greenyellow;
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.captureButton-success {
+  display: flex;
+  justify-content: center;
+  padding: 10px 30px;
+  border-radius: 25px;
+  background: transparent;
+  background-color: greenyellow;
+  color: #000;
+  font-size: 14px;
+  font-weight: bold;
+  margin: 30px auto;
+  cursor: pointer;
+  border: 2px solid greenyellow;
+  transition: all 0.3s ease-in-out;
+}
+
+.captureButton-success:hover {
+  background-color: rgb(94, 255, 0);
+  border: 2px solid rgb(94, 255, 0);
+}
+
+.captured-pictures {
+  width: 300px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+.captured-pictures img {
+  width: 70px;
+  height: 70px;
+  margin-bottom: 10px;
+  border-radius: 100%;
+  border: 2px solid #f05941;
+}
+
+.heading {
+  margin-top: 0px;
+}
+.title {
+  /* margin-top: 0px; */
+}
+
+.bg_primary {
+  background-color: #be3144;
+}
+
+/* FORM */
+body {
+  font-family: "Nunito", sans-serif;
+}
+
+.form {
+  background-color: #e2e8f0;
+  padding: 20px;
+  border-radius: 5px;
+}
+
+.white {
+  color: #fff;
+}
+
+.bg_dark {
+  background-color: #be3144;
+}
+
+.w-full {
+  width: 100%;
+}
+
+/* @media only screen and (min-width: 425px){
+	.w-full {
+    width: 350px;
+  }
+} */
+
+.form .label {
+  font-weight: 700;
+  margin: 4px 0px;
+  color: white;
+}
+
+.form .input {
+  width: 100%;
+  height: 35px;
+  border: none;
+  outline: none;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  font-size: 16px;
+  padding: 0px 10px;
+}
+
+.form .submit-btn {
+  outline: none;
+  margin: 5px 0px;
+  padding: 10px 30px;
+  font-weight: 700;
+  border-radius: 5px;
+  cursor: pointer;
+  background: #f05941;
+  color: rgb(255, 255, 255);
+  transition: 0.4s ease-in-out;
+}
+
+.form .submit-btn-disabled:disabled {
+  outline: none;
+  margin: 5px 0px;
+  padding: 10px 30px 8px 30px;
+  font-weight: 700;
+  border-radius: 5px;
+  background: #f05941;
+  color: rgb(255, 255, 255);
+  transition: 0.4s ease-in-out;
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.form .captureBtn {
+  outline: none;
+  border: 2px solid greenyellow;
+  margin: 10px auto;
+  padding: 7px 20px 5px 20px;
+  font-weight: 700;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.4s ease-in-out;
+  background-color: greenyellow;
+}
+
+.form .captureBtn:hover {
+  background-color: greenyellow;
+}
+
+.form .verify-btn {
+  outline: none;
+  width: 100%;
+  margin: 5px 0px;
+  padding: 10px 30px;
+  font-weight: 700;
+  border-radius: 5px;
+  cursor: pointer;
+  color: white;
+  background: #f05941;
+  transition: 0.4s ease-in-out;
+}
+
+.form .verify-btn-success {
+  outline: none;
+  width: 100%;
+  margin: 5px 0px;
+  padding: 10px 30px;
+  background: #f05941;
+  font-weight: 700;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.4s ease-in-out;
+  opacity: 0.5;
+  color: white;
+}
+
+.form .camera {
+  width: 100%;
+  height: 200px;
+}
+
+.capturedImagesContainer {
+  width: 350px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.capturedImagesContainer > img {
+  width: 90px;
+  height: 80px;
+}
+
+.message {
+  font-size: 12px;
+  color: white;
+  width: 300px;
+}
