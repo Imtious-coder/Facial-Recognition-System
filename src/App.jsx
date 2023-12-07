@@ -112,7 +112,7 @@ function App() {
         // Define thresholds for sensitivity with adjusted values
         const leftThreshold = 0.6; // 65% of the video width
         const rightThreshold = 0.35; // 35% of the video width
-        const upperThreshold = 0.4; // Adjusted value for reduced sensitivity
+        const upperThreshold = 0.35; // Adjusted value for reduced sensitivity
         const bottomThreshold = 0.5; // 50% of the video height
 
         // Check direction based on thresholds
@@ -160,6 +160,14 @@ function App() {
   }, [showVerify]);
 
   useEffect(() => {
+    if ("vibrate" in navigator) {
+      navigator.vibrate(300);
+    } else {
+      console.log("Vibration API not supported");
+    }
+  }, [pictureCLicked]);
+
+  useEffect(() => {
     pictureCLicked === 5 ? setShhowVerify(false) : "";
   }, [pictureCLicked]);
 
@@ -175,13 +183,18 @@ function App() {
 
   // PICTURE CLICK AUTOMATED FUNCTION
   useEffect(() => {
-    (pictureCLicked === 0 && side === "Front" && topBottom === "Front") ||
-    (pictureCLicked === 1 && side === "Right" && noFaceDetected === false) ||
-    (pictureCLicked === 2 && side === "Left") ||
-    (pictureCLicked === 3 && topBottom === "Up") ||
-    (pictureCLicked === 4 && topBottom === "Down")
-      ? (capturePicture(), setPictureClicked((prev) => prev + 1))
-      : "";
+    if (
+      (pictureCLicked === 0 && side === "Front") ||
+      (pictureCLicked === 1 && side === "Right" && noFaceDetected === false) ||
+      (pictureCLicked === 2 && side === "Left") ||
+      (pictureCLicked === 3 && topBottom === "Up") ||
+      (pictureCLicked === 4 && topBottom === "Down")
+    ) {
+      setTimeout(() => {
+        capturePicture();
+        setPictureClicked((prev) => prev + 1);
+      }, 400);
+    }
   }, [side, topBottom]);
 
   useEffect(() => {
@@ -221,7 +234,7 @@ function App() {
     pictureCLicked === 1
       ? toast.success("Fornt Face Detected", {
           position: "top-right",
-          autoClose: 5000,
+          autoClose: 2000,
           hideProgressBar: false,
           closeOnClick: true,
           pauseOnHover: true,
@@ -232,7 +245,7 @@ function App() {
       : pictureCLicked === 2
       ? toast.success("Right Face Detected", {
           position: "top-right",
-          autoClose: 5000,
+          autoClose: 2000,
           hideProgressBar: false,
           closeOnClick: true,
           pauseOnHover: true,
@@ -243,7 +256,7 @@ function App() {
       : pictureCLicked === 3
       ? toast.success("Left Face Detected", {
           position: "top-right",
-          autoClose: 5000,
+          autoClose: 2000,
           hideProgressBar: false,
           closeOnClick: true,
           pauseOnHover: true,
@@ -254,7 +267,7 @@ function App() {
       : pictureCLicked === 4
       ? toast.success("Upper Front Face Detected", {
           position: "top-right",
-          autoClose: 5000,
+          autoClose: 2000,
           hideProgressBar: false,
           closeOnClick: true,
           pauseOnHover: true,
@@ -265,7 +278,7 @@ function App() {
       : pictureCLicked === 5
       ? toast.success("Bottom Front Face Detected", {
           position: "top-right",
-          autoClose: 5000,
+          autoClose: 2000,
           hideProgressBar: false,
           closeOnClick: true,
           pauseOnHover: true,
@@ -275,6 +288,27 @@ function App() {
         })
       : "";
   }, [pictureCLicked]);
+
+  useEffect(() => {
+    console.log(formData, "Dataaaaaaaaaaaaaaaaaaaaaa");
+  }, [formData]);
+
+  useEffect(() => {
+    const downloadImages = () => {
+      formData.images.forEach((imageUrl, index) => {
+        const link = document.createElement("a");
+        link.href = imageUrl;
+        link.download = `image_${index + 1}.webp`;
+        link.style.display = "none";
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      });
+    };
+
+    formData.images.length === 5 ? downloadImages() : "";
+    console.log("Imagesssssssssssssssssssssssssssss");
+  }, [formData]);
 
   return (
     <div className="flex justify-center">
@@ -430,7 +464,7 @@ function App() {
                       <option value="" disabled>
                         Select Company
                       </option>
-                      <option value="company1">SG</option>
+                      <option value="company1">Singularity</option>
                       <option value="company2">Bondstein</option>
                     </select>
                   </div>
@@ -484,17 +518,17 @@ function App() {
                   </div>
                   <button
                     id="openCameraBtn"
-                    className={`${
-                      capturedPictures.length === 5
-                        ? "verify-btn-success"
-                        : "verify-btn"
-                    }`}
+                    className="verify-btn"
                     onClick={() =>
-                      capturedPictures.length === 5 ? "" : setShhowVerify(true)
+                      capturedPictures.length === 5
+                        ? (setCapturedPictures([]),
+                          setPictureClicked(0),
+                          setShhowVerify(true))
+                        : setShhowVerify(true)
                     }
                   >
                     {capturedPictures.length >= 5
-                      ? "Verification Completed 😊"
+                      ? "Retry Face Registration"
                       : "Complete Your Face Registration"}
                   </button>
 
